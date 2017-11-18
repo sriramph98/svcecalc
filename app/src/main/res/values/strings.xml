@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SVCE Calculator</string>
+    <string name="calc_title">ENTER YOUR MARKS</string>
+    <string name="button_submit">SUBMIT</string>
 </resources>
