@@ -2,4 +2,11 @@
     <string name="app_name">SVCE Calculator</string>
     <string name="calc_title">ENTER YOUR MARKS</string>
     <string name="button_submit">SUBMIT</string>
+    <string name="text_phase">PHASE</string>
+    <string name="text_cat">CAT</string>
+    <string name="text_ass">ASSIGNMENT</string>
+    <string name="text_hint_cat">Enter CAT Mark</string>
+    <string name="text_hint_ass">Enter Assignment Mark</string>
+    <string name="text_error_cat">Please enter CAT mark</string>
+    <string name="text_error_ass">Please enter Assignment mark</string>
 </resources>

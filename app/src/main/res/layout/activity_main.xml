@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context="com.cosmos.android.svcecalculator.MainActivity"
-    android:padding="@dimen/default_margin">
+    android:padding="@dimen/default_margin"
+    tools:context="com.cosmos.android.svcecalculator.MainActivity">
 
     <TextView
         android:id="@+id/headerText"
@@ -16,32 +16,67 @@
         android:textSize="@dimen/text_header_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
+        android:layout_marginTop="@dimen/default_margin"
         />
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/submitButton"
-        app:layout_constraintTop_toBottomOf="@+id/headerText"
-
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerText"
+        app:layout_constraintBottom_toTopOf="@+id/submitButton"
         >
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout"
+        <LinearLayout
+            android:id="@+id/lineartViewt"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-        </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_header_size"
+                android:textColor="@color/translucent"
+                android:layout_margin="@dimen/small_margin"
+                android:text="PHASE I" />
+            <com.cosmos.android.svcecalculator.view.CustomEditText android:id="@+id/catEditText1" android:layout_margin="@dimen/default_margin" android:inputType="numberDecimal" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/text_hint_cat"/>
+            <com.cosmos.android.svcecalculator.view.CustomEditText android:id="@+id/assEditText1" android:layout_margin="@dimen/default_margin" android:inputType="numberDecimal" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/text_hint_ass"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_header_size"
+                android:textColor="@color/translucent"
+                android:layout_margin="@dimen/small_margin"
+                android:text="PHASE II" />
+            <com.cosmos.android.svcecalculator.view.CustomEditText android:id="@+id/catEditText2" android:layout_margin="@dimen/default_margin" android:inputType="numberDecimal" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/text_hint_cat"/>
+            <com.cosmos.android.svcecalculator.view.CustomEditText android:id="@+id/assEditText2" android:layout_margin="@dimen/default_margin" android:inputType="numberDecimal" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/text_hint_ass"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_header_size"
+                android:textColor="@color/translucent"
+                android:layout_margin="@dimen/small_margin"
+                android:text="PHASE III" />
+            <com.cosmos.android.svcecalculator.view.CustomEditText android:id="@+id/catEditText3" android:layout_margin="@dimen/default_margin" android:inputType="numberDecimal" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/text_hint_cat"/>
+            <com.cosmos.android.svcecalculator.view.CustomEditText android:id="@+id/assEditText3" android:layout_margin="@dimen/default_margin" android:inputType="numberDecimal" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/text_hint_ass"/>
+        </LinearLayout>
     </ScrollView>
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
         android:text="@string/button_submit"
-        style="?android:attr/borderlessButtonStyle"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
