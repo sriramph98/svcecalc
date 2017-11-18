@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     tools:context="com.cosmos.android.svcecalculator.MainActivity"
-    android:layout_margin="@dimen/default_margin">
+    android:padding="@dimen/default_margin">
 
     <TextView
         android:id="@+id/headerText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/calc_title"
+        android:textSize="@dimen/text_header_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="@dimen/text_header_size"
 
         />
 
@@ -28,13 +29,10 @@
         >
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CAT" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
@@ -43,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_submit"
+        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
