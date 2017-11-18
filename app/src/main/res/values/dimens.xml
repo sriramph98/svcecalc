@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_margin">15dp</dimen>
+    <dimen name="large_padding">25dp</dimen>
     <dimen name="text_header_size">20sp</dimen>
+    <dimen name="text_result_size">100sp</dimen>
 </resources>
