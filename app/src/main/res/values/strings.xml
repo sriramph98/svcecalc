@@ -9,4 +9,12 @@
     <string name="text_hint_ass">Enter Assignment Mark</string>
     <string name="text_error_cat">Please enter CAT mark</string>
     <string name="text_error_ass">Please enter Assignment mark</string>
+    <string name="title_activity_on_boarding">OnBoarding</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="onboarding_1_text">Calculate Internal marks</string>
+    <string name="title_activity_minimum_grade">MinimumGrade</string>
+
+    <string name="cat">Cat</string>
+    <string name="assignment">Assignment</string>
 </resources>
