@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.cosmos.android.svcecalculator.model.Phase;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -50,7 +52,7 @@ public class ShowResult extends AppCompatActivity {
             phaseContainer.addView(viewGroup);
         }
 
-        Map<String, Double> values = new ArrayMap<>();
+        Map<String, Double> values = new LinkedHashMap<>();
         values.put("S", 90.0d);
         values.put("A", 80.0d);
         values.put("B", 70.0d);

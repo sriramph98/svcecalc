@@ -15,8 +15,7 @@ public object DataHelper {
             for (phase in phases) {
                 sum += phase.phaseMark
             }
-            sum *= 50 / 3
-            return sum
+            return sum.times(50).div(3)
         }
 
 
