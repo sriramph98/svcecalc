@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">@android:color/black</color>
     <color name="colorAccent">#2980b9</color>
     <color name="colorForeground">@android:color/white</color>
+    <color name="premiumYellow">#D09700</color>
 
     <color name="translucent">#91ffffff</color>
 

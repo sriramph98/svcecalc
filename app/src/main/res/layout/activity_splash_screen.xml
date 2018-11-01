@@ -15,8 +15,8 @@
         android:contentDescription="logo"
         app:srcCompat="@drawable/logo" />
     <ImageView
-        android:layout_width="@dimen/splash_logo_dimen"
-        android:layout_height="@dimen/splash_logo_dimen"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"

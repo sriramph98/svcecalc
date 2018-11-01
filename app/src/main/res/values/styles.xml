@@ -5,15 +5,25 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/premiumYellow</item>
         <item name="android:textColor">@color/colorForeground</item>
     </style>
 
+    <style name="AppTheme.HeaderTextView" parent="Base.TextAppearance.AppCompat.Headline">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="AppTheme.FullScreen" parent="AppTheme">
         <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="AppTheme.FullScreen.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.FullScreen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

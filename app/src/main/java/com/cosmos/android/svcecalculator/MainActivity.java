@@ -1,26 +1,17 @@
 package com.cosmos.android.svcecalculator;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.GridLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.cosmos.android.svcecalculator.view.CustomEditText;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
+import com.cosmos.android.svcecalculator.model.Phase;
+import com.cosmos.android.svcecalculator.view.NumberEditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,59 +20,104 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button submitButton = null;
 
 
-    CustomEditText cat1 = null;
-    CustomEditText ass1 = null;
-    CustomEditText cat2 = null;
-    CustomEditText ass2 = null;
-    CustomEditText cat3 = null;
-    CustomEditText ass3 = null;
+    NumberEditText cat1 = null;
+    NumberEditText ass1 = null;
+    NumberEditText cat2 = null;
+    NumberEditText ass2 = null;
+    NumberEditText cat3 = null;
+    NumberEditText ass3 = null;
+
+    boolean isValidate1 = true;
+    boolean isValidate2 = true;
+    boolean isValidate3 = true;
 
 
-    private void initializeEditTexts(){
+    private void initializeEditTexts() {
         cat1 = findViewById(R.id.catEditText1);
         ass1 = findViewById(R.id.assEditText1);
         cat2 = findViewById(R.id.catEditText2);
         ass2 = findViewById(R.id.assEditText2);
         cat3 = findViewById(R.id.catEditText3);
         ass3 = findViewById(R.id.assEditText3);
+
+        View.OnClickListener listener1 = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //verification process
+                NumberEditText editText = (NumberEditText) v;
+                if (editText.getDouble() > 50 && editText.getDouble() == 0)
+                    isValidate1 = false;
+            }
+        };
+
+        View.OnClickListener listener2 = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //verification process
+                NumberEditText editText = (NumberEditText) v;
+                if (editText.getDouble() > 50 && editText.getDouble() == 0)
+                    isValidate2 = false;
+            }
+        };
+
+        View.OnClickListener listener3 = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //verification process
+                NumberEditText editText = (NumberEditText) v;
+                if (editText.getDouble() > 50 && editText.getDouble() == 0)
+                    isValidate3 = false;
+            }
+        };
+
+        cat1.verifyCallback(listener1);
+        ass1.verifyCallback(listener1);
+        cat2.verifyCallback(listener2);
+        ass2.verifyCallback(listener2);
+        cat3.verifyCallback(listener3);
+        ass3.verifyCallback(listener3);
+
+
     }
-    private void initialize(){
-        initializeEditTexts();
+
+    private void initialize() {
         headerTextView = findViewById(R.id.headerText);
         submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(this);
+        initializeEditTexts();
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initialize();
     }
 
-    private double calculatePhaseMark(Editable cat_mark_s, Editable ass_mark_s){
-        double cat_mark = Double.parseDouble(cat_mark_s.toString());
-        double ass_mark = Double.parseDouble(ass_mark_s.toString());
-        return ((cat_mark / 50 * 0.7) + (ass_mark / 50 * 0.3)) + (50/3);
-    }
-    private boolean validateEditText() {
-        return true;
-    }
-
-    private double addValues() {
-        return calculatePhaseMark(cat1.getText(), ass1.getText()) + calculatePhaseMark(cat2.getText(), ass2.getText()) + calculatePhaseMark(cat3.getText(), ass3.getText());
-    }
 
     @Override
     public void onClick(View v) {
+        cat1.verify();
+        ass1.verify();
+        cat2.verify();
+        ass2.verify();
+        cat3.verify();
+        ass3.verify();
         //validate input
-        if(validateEditText()) {
-            double internalMark = addValues();
+        if (isValidate1 || isValidate2 || isValidate3) {
             Intent intent = new Intent();
             intent.setClass(context, ShowResult.class);
-            intent.putExtra("internals", internalMark);
+            DataHelper.INSTANCE.getPhases().clear();
+            DataHelper.INSTANCE.getPhases().add(new Phase(cat1.getDouble(), ass1.getDouble()));
+            DataHelper.INSTANCE.getPhases().add(new Phase(cat2.getDouble(), ass2.getDouble()));
+            DataHelper.INSTANCE.getPhases().add(new Phase(cat3.getDouble(), ass3.getDouble()));
             startActivity(intent);
         }
+        isValidate1 = true;
+        isValidate2 = true;
+        isValidate3 = true;
     }
 
 

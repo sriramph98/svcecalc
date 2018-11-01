@@ -1,46 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cosmos.android.svcecalculator.ShowResult"
-    android:background="@color/colorPrimary"
-    android:padding="@dimen/large_padding">
+    android:padding="@dimen/small_margin">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:orientation="vertical"
+        android:padding="@dimen/large_padding"
+        tools:context="com.cosmos.android.svcecalculator.ShowResult">
+
+        <LinearLayout
+            android:id="@+id/phaseContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_padding"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOU'VE\nSCORED"
+                android:textAlignment="center"
+                android:textColor="#AAA"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/con1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/resultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    android:fadingEdgeLength="@dimen/large_padding"
+                    android:requiresFadingEdge="horizontal"
+                    android:text="28.00"
+                    android:textSize="@dimen/text_large"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/horizontal_line" />
+
+                <TextView
+                    android:id="@+id/totalTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    android:text="50"
+                    android:textSize="@dimen/text_large" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/resultTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="45"
-            android:textSize="@dimen/text_result_size"
-            android:layout_margin="@dimen/default_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="@dimen/divider_margin"
+            android:text="MINIMUM GRADE MARK"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold" />
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:background="@drawable/horizontal_line"
-            android:layout_margin="@dimen/default_margin"
-            app:layout_constraintTop_toBottomOf="@id/resultTextView"
-            app:layout_constraintBottom_toTopOf="@+id/totalTextView" />
 
-        <TextView
-            android:id="@+id/totalTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/minimumGradeContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="50"
-            android:textSize="100sp"
-            android:layout_margin="@dimen/default_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </android.support.constraint.ConstraintLayout>
-</RelativeLayout>
+            android:layout_marginTop="@dimen/large_padding"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+
+        <!--<ImageView-->
+        <!--android:id="@+id/swipe_up"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_below="@id/min"-->
+        <!--android:paddingTop="10dp"-->
+        <!--app:srcCompat="@drawable/swipe_up"/>-->
+
+    </LinearLayout>
+</ScrollView>
