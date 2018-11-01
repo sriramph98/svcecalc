@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -23,7 +24,6 @@ import com.cosmos.android.svcecalculator.R;
  * Created by Sriram on 19-11-2017.
  */
 public class NumberEditText extends TextInputEditText {
-    AppCompatEditText editText = this;
     private OnClickListener listener = null;
     private final String TAG = "NumberEditText";
 
@@ -38,18 +38,25 @@ public class NumberEditText extends TextInputEditText {
         return i;
     }
 
+    void init() {
+        setInputType(InputType.TYPE_CLASS_NUMBER);
+    }
+
     public NumberEditText(Context context) {
         super(context);
+        init();
         addTextChangedListener(new CustomTextWatcher());
     }
 
     public NumberEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
         addTextChangedListener(new CustomTextWatcher());
     }
 
     public NumberEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
         addTextChangedListener(new CustomTextWatcher());
     }
 
@@ -77,23 +84,20 @@ public class NumberEditText extends TextInputEditText {
         @Override
         public void afterTextChanged(Editable s) {
             if (TextUtils.isEmpty(s)) {
-                editText.setError("Field is empty\nPlease enter the mark");
-
+                setError("Field is empty\nPlease enter the mark");
             }
             try {
                 if (Double.parseDouble(s.toString()) > 50) {
-                    editText.setError("Invalid input ");
+                    setError("Invalid input");
+                }
+
+                if (s.toString().contains(".")) {
+                    setText("0.");
+                    setSelection(getText().length());
                 }
             } catch (NumberFormatException ne) {
                 Log.e("DOUBLE", ne.getMessage());
             }
-            if (s.toString().contains(".")) {
-                editText.setText("0.");
-                editText.setSelection(editText.getText().length());
-
-            }
         }
-
-
     }
 }
