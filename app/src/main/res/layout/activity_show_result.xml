@@ -22,27 +22,27 @@
         </LinearLayout>
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_padding">
+            android:layout_marginTop="@dimen/large_padding"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/small_margin"
                 android:text="YOU'VE\nSCORED"
+                android:textAlignment="center"
                 android:textColor="#AAA"
-                android:textSize="@dimen/text_xlarge"
+                android:textSize="@dimen/text_large"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/con1"
-                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
-                android:background="@drawable/result_bg"
+                android:layout_marginStart="@dimen/default_margin"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -51,10 +51,11 @@
                     android:id="@+id/resultTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
                     android:fadingEdgeLength="@dimen/large_padding"
                     android:requiresFadingEdge="horizontal"
                     android:text="28.00"
-                    android:textSize="@dimen/text_xlarge"
+                    android:textSize="@dimen/text_large"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -68,17 +69,18 @@
                     android:id="@+id/totalTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
                     android:text="50"
-                    android:textSize="@dimen/text_xlarge" />
+                    android:textSize="@dimen/text_large" />
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_padding"
+            android:layout_marginTop="@dimen/divider_margin"
             android:text="MINIMUM GRADE MARK"
             android:textAlignment="center"
             android:textSize="@dimen/text_medium"

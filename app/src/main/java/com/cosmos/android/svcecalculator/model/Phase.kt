@@ -1,6 +1,11 @@
 package com.cosmos.android.svcecalculator.model
 
-class Phase(public val catMark: String, val assMark: String){
+import com.cosmos.android.svcecalculator.view.NumberEditText
 
-    constructor(): this("", "")
+data class Phase(val catMark: Double, val assMark: Double) {
+
+    var phaseMark: Double = 0.0
+        get() {
+            return catMark / 50 * 0.7 + assMark / 50 * 0.3
+        }
 }

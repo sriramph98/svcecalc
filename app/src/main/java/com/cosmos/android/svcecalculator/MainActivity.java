@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cosmos.android.svcecalculator.model.Phase;
 import com.cosmos.android.svcecalculator.view.NumberEditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean isValidate3 = true;
 
 
-
     private void initializeEditTexts() {
         cat1 = findViewById(R.id.catEditText1);
         ass1 = findViewById(R.id.assEditText1);
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 NumberEditText editText = (NumberEditText) v;
                 if (editText.getDouble() > 50 && editText.getDouble() == 0)
                     isValidate1 = false;
-                else isValidate2 = isValidate2 && true;
             }
         };
 
@@ -58,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 NumberEditText editText = (NumberEditText) v;
                 if (editText.getDouble() > 50 && editText.getDouble() == 0)
                     isValidate2 = false;
-                else isValidate2 = isValidate2 && true;
             }
         };
 
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 NumberEditText editText = (NumberEditText) v;
                 if (editText.getDouble() > 50 && editText.getDouble() == 0)
                     isValidate3 = false;
-                else isValidate3 = isValidate3 && true;
             }
         };
 
@@ -100,21 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private double calculatePhaseMark(NumberEditText cat_mark_s, NumberEditText ass_mark_s) {
-
-        double a;
-        double cat_mark = cat_mark_s.getDouble();
-        double ass_mark = ass_mark_s.getDouble();
-        a = ((cat_mark / 50) * 0.7) + ((ass_mark / 50) * 0.3);
-        return a;
-    }
-
-    private double addValues() {
-        return (calculatePhaseMark(cat1, ass1)
-                + calculatePhaseMark(cat2, ass2)
-                + calculatePhaseMark(cat3, ass3)) * 50 / 3;
-    }
-
     @Override
     public void onClick(View v) {
         cat1.verify();
@@ -125,18 +107,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ass3.verify();
         //validate input
         if (isValidate1 || isValidate2 || isValidate3) {
-            double internalMark = addValues();
             Intent intent = new Intent();
             intent.setClass(context, ShowResult.class);
-            intent.putExtra("internals", internalMark);
+            DataHelper.INSTANCE.getPhases().clear();
+            DataHelper.INSTANCE.getPhases().add(new Phase(cat1.getDouble(), ass1.getDouble()));
+            DataHelper.INSTANCE.getPhases().add(new Phase(cat2.getDouble(), ass2.getDouble()));
+            DataHelper.INSTANCE.getPhases().add(new Phase(cat3.getDouble(), ass3.getDouble()));
             startActivity(intent);
         }
         isValidate1 = true;
         isValidate2 = true;
         isValidate3 = true;
     }
-
-
 
 
 }

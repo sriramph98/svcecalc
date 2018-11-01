@@ -34,20 +34,18 @@ public class ShowResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_result);
         initialize();
-        double internals = getIntent().getDoubleExtra("internals", -1);
-        String internals_s = String.format("%1$,.2f", internals);
+        String internals_s = String.format("%1$,.2f", DataHelper.INSTANCE.getInternatlMark());
         txt.setText(internals_s);
 
+        int i = 0;
         for (Phase phase : DataHelper.INSTANCE.getPhases()) {
             ViewGroup viewGroup = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.phase_item, phaseContainer, false);
             TextView catMarkTxt = viewGroup.findViewById(R.id.catMark);
             TextView assMarkTxt = viewGroup.findViewById(R.id.assMark);
-            TextView phaseTitle = new TextView(this);
-            phaseTitle.setTextAppearance(R.style.TextAppearance_AppCompat_Headline);
-            phaseTitle.setAllCaps(true);
-            phaseTitle.setText("Phase " + DataHelper.INSTANCE.getPhases().indexOf(phase));
-            catMarkTxt.setText(phase.catMark);
-            assMarkTxt.setText(phase.assMark);
+            TextView phaseTitle = (TextView) LayoutInflater.from(this).inflate(R.layout.phase_text_view, phaseContainer, false);
+            phaseTitle.setText("Phase " + ++i);
+            catMarkTxt.setText(String.valueOf(phase.getCatMark()));
+            assMarkTxt.setText(String.valueOf(phase.getAssMark()));
             phaseContainer.addView(phaseTitle);
             phaseContainer.addView(viewGroup);
         }
@@ -61,7 +59,7 @@ public class ShowResult extends AppCompatActivity {
         values.put("E", 50.0d);
 
         for (Map.Entry<String, Double> value : values.entrySet()) {
-            double minGradeVal = ((value.getValue() - internals) * 2.0d);
+            double minGradeVal = ((value.getValue() - DataHelper.INSTANCE.getInternatlMark()) * 2.0d);
             ViewGroup viewGroup = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.activity_minimum_grade, minimumGradeContainer, false);
             TextView valueTxt = (viewGroup.findViewById(R.id.minimumPoints));
             TextView gradeTxt = (viewGroup.findViewById(R.id.minimumLabel));
