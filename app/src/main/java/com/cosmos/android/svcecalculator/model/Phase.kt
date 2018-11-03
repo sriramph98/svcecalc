@@ -8,4 +8,8 @@ data class Phase(val catMark: Double, val assMark: Double) {
         get() {
             return catMark / 50 * 0.7 + assMark / 50 * 0.3
         }
+
+    fun exceeds(): Boolean {
+        return catMark > 50 || assMark > 50
+    }
 }

@@ -24,7 +24,6 @@ import com.cosmos.android.svcecalculator.R;
  * Created by Sriram on 19-11-2017.
  */
 public class NumberEditText extends TextInputEditText {
-    private OnClickListener listener = null;
     private final String TAG = "NumberEditText";
 
     public double getDouble() {
@@ -58,15 +57,6 @@ public class NumberEditText extends TextInputEditText {
         super(context, attrs, defStyleAttr);
         init();
         addTextChangedListener(new CustomTextWatcher());
-    }
-
-
-    public void verifyCallback(OnClickListener listener) {
-        this.listener = listener;
-    }
-
-    public void verify() {
-        listener.onClick(this);
     }
 
     class CustomTextWatcher implements TextWatcher {

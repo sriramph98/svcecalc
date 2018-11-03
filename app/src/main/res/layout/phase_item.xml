@@ -15,6 +15,7 @@
 
         <TextView
             android:id="@+id/catMark"
+            style="@style/AppTheme.TextHeavy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/premiumYellow"
@@ -39,6 +40,7 @@
 
         <TextView
             android:id="@+id/assMark"
+            style="@style/AppTheme.TextHeavy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/premiumYellow"
