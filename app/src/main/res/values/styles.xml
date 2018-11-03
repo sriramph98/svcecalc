@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/premiumYellow</item>
         <item name="android:textColor">@color/colorForeground</item>
+        <item name="android:textViewStyle">@style/AppTheme.TextLight</item>
+        <item name="imageButtonStyle">@style/AppTheme.ImageButton</item>
     </style>
 
     <style name="AppTheme.HeaderTextView" parent="Base.TextAppearance.AppCompat.Headline">
@@ -25,5 +27,20 @@
     <style name="AppTheme.FullScreen.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.FullScreen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.TextLight" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="fontPath">fonts/SoinSansNeue-Light.otf</item>
+    </style>
+
+    <style name="AppTheme.TextHeavy" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="fontPath">fonts/SoinSansNeue-Bold.otf</item>
+    </style>
+
+    <style name="AppTheme.ImageButton" parent="Base.Widget.AppCompat.ImageButton">
+        <item name="android:tint">@color/colorForeground</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 
 </resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.ImageButton" parent="Base.Widget.AppCompat.ImageButton">
+        <item name="android:tint">@color/colorForeground</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+    </style>
+</resources>

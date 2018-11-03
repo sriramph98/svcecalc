@@ -1,124 +1,114 @@
 package com.cosmos.android.svcecalculator;
 
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cosmos.android.svcecalculator.model.Phase;
 import com.cosmos.android.svcecalculator.view.NumberEditText;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.ArrayList;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+public class MainActivity extends AppActivity implements View.OnClickListener {
 
     Context context = this;
     TextView headerTextView = null;
     Button submitButton = null;
+    Button resetButton = null;
 
+    ArrayList<NumberEditText> editTexts = new ArrayList<>();
 
-    NumberEditText cat1 = null;
-    NumberEditText ass1 = null;
-    NumberEditText cat2 = null;
-    NumberEditText ass2 = null;
-    NumberEditText cat3 = null;
-    NumberEditText ass3 = null;
-
-    boolean isValidate1 = true;
-    boolean isValidate2 = true;
-    boolean isValidate3 = true;
-
-
+    @SuppressLint("FindViewByIdCast")
     private void initializeEditTexts() {
-        cat1 = findViewById(R.id.catEditText1);
-        ass1 = findViewById(R.id.assEditText1);
-        cat2 = findViewById(R.id.catEditText2);
-        ass2 = findViewById(R.id.assEditText2);
-        cat3 = findViewById(R.id.catEditText3);
-        ass3 = findViewById(R.id.assEditText3);
-
-        View.OnClickListener listener1 = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //verification process
-                NumberEditText editText = (NumberEditText) v;
-                if (editText.getDouble() > 50 && editText.getDouble() == 0)
-                    isValidate1 = false;
-            }
-        };
-
-        View.OnClickListener listener2 = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //verification process
-                NumberEditText editText = (NumberEditText) v;
-                if (editText.getDouble() > 50 && editText.getDouble() == 0)
-                    isValidate2 = false;
-            }
-        };
-
-        View.OnClickListener listener3 = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //verification process
-                NumberEditText editText = (NumberEditText) v;
-                if (editText.getDouble() > 50 && editText.getDouble() == 0)
-                    isValidate3 = false;
-            }
-        };
-
-        cat1.verifyCallback(listener1);
-        ass1.verifyCallback(listener1);
-        cat2.verifyCallback(listener2);
-        ass2.verifyCallback(listener2);
-        cat3.verifyCallback(listener3);
-        ass3.verifyCallback(listener3);
-
-
+        editTexts.add(findViewById(R.id.catEditText1));
+        editTexts.add(findViewById(R.id.catEditText2));
+        editTexts.add(findViewById(R.id.catEditText3));
+        editTexts.add(findViewById(R.id.assEditText1));
+        editTexts.add(findViewById(R.id.assEditText2));
+        editTexts.add(findViewById(R.id.assEditText3));
     }
 
     private void initialize() {
         headerTextView = findViewById(R.id.headerText);
         submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(this);
+        resetButton = findViewById(R.id.resetButton);
+        resetButton.setOnClickListener(this);
         initializeEditTexts();
     }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/SoinSansNeue-Roman.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        WRITE_EXT_REQUEST_CODE);
+            }
+
+        } else {
+            // user already provided permission
+            // perform function for what you want to achieve
+        }
         initialize();
     }
 
 
     @Override
     public void onClick(View v) {
-        cat1.verify();
-        ass1.verify();
-        cat2.verify();
-        ass2.verify();
-        cat3.verify();
-        ass3.verify();
-        //validate input
-        if (isValidate1 || isValidate2 || isValidate3) {
-            Intent intent = new Intent();
-            intent.setClass(context, ShowResult.class);
-            DataHelper.INSTANCE.getPhases().clear();
-            DataHelper.INSTANCE.getPhases().add(new Phase(cat1.getDouble(), ass1.getDouble()));
-            DataHelper.INSTANCE.getPhases().add(new Phase(cat2.getDouble(), ass2.getDouble()));
-            DataHelper.INSTANCE.getPhases().add(new Phase(cat3.getDouble(), ass3.getDouble()));
-            startActivity(intent);
+        switch (v.getId()) {
+            case R.id.submitButton:
+                Intent intent = new Intent();
+                intent.setClass(context, ShowResult.class);
+                DataHelper.INSTANCE.getPhases().clear();
+                DataHelper.INSTANCE.getPhases().add(new Phase(editTexts.get(0).getDouble(), editTexts.get(3).getDouble()));
+                DataHelper.INSTANCE.getPhases().add(new Phase(editTexts.get(1).getDouble(), editTexts.get(4).getDouble()));
+                DataHelper.INSTANCE.getPhases().add(new Phase(editTexts.get(2).getDouble(), editTexts.get(5).getDouble()));
+
+                for (Phase phase : DataHelper.INSTANCE.getPhases()) {
+                    if (phase.exceeds()) {
+                        Toast.makeText(this, "Invalid input, try with different inputs", Toast.LENGTH_LONG).show();
+                        DataHelper.INSTANCE.getPhases().clear();
+                        return;
+                    }
+                }
+                startActivity(intent);
+                break;
+            case R.id.resetButton:
+                for (NumberEditText ndt : editTexts) {
+                    ndt.setText("");
+                }
+                break;
         }
-        isValidate1 = true;
-        isValidate2 = true;
-        isValidate3 = true;
     }
-
-
 }
